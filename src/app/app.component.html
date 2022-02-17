@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-title>FinnHub Stock Ticker</mat-card-title>
+  <mat-form-field appearance="fill">
+    <mat-label>Input Stock Code</mat-label>
+    <input
+      matInput
+      [(ngModel)]="stock"
+      type="text"
+      (keydown.enter)="getStock()"
+    />
+    <div class="vert-spacer">
+      <button mat-raised-button (click)="getStock()">Search</button>
+    </div>
+  </mat-form-field>
+  <div>
+    <mat-card-subtitle *ngIf="ticker"
+      ><div>Stock: {{ ticker?.ticker }}</div>
+      <div>Status: {{ ticker?.status }}</div>
+      <div>Query Count: {{ ticker?.queryCount }}</div>
+    </mat-card-subtitle>
+    <mat-card-content *ngFor="let result of results">
+      <mat-card>
+        <div>c: {{ result.c }}</div>
+        <div>h: {{ result.h }}</div>
+        <div>l: {{ result.l }}</div>
+        <div>n: {{ result.n }}</div>
+        <div>o: {{ result.o }}</div>
+        <div>t: {{ result.t }}</div>
+        <div>v: {{ result.v }}</div>
+        <div>vw: {{ result.vw }}</div>
+      </mat-card>
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<router-outlet></router-outlet>
