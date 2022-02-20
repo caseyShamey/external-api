@@ -1,36 +1,47 @@
 <mat-card>
-  <mat-card-title>FinnHub Stock Ticker</mat-card-title>
-  <mat-form-field appearance="fill">
-    <mat-label>Input Stock Code</mat-label>
-    <input
-      matInput
-      [(ngModel)]="stock"
-      type="text"
-      (keydown.enter)="getStock()"
-    />
-    <div class="vert-spacer">
-      <button mat-raised-button (click)="getStock()">Search</button>
-    </div>
-  </mat-form-field>
-  <div>
-    <mat-card-subtitle *ngIf="ticker"
-      ><div>Stock: {{ ticker?.ticker }}</div>
-      <div>Status: {{ ticker?.status }}</div>
-      <div>Query Count: {{ ticker?.queryCount }}</div>
-    </mat-card-subtitle>
-    <mat-card-content *ngFor="let result of results">
+  <form class="full-width">
+    <mat-card-title class="text-center">Document Censor</mat-card-title>
+    <div class="vert-spacer"></div>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Input Words and Phrases to Censor</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="10"
+        placeholder="Input words and phrases"
+        [(ngModel)]="wordsAndPhrasesToRedactText"
+        [ngModelOptions]="{ standalone: true }"
+        type="text"
+      ></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Input Document Text to Censor</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="10"
+        placeholder="Input Document to Censor"
+        [(ngModel)]="documentText"
+        [ngModelOptions]="{ standalone: true }"
+        type="text"
+      ></textarea>
+    </mat-form-field>
+    <button mat-raised-button (click)="censorText()">Redact</button>
+  </form>
+  <div class="vert-spacer"></div>
+  <ng-container *ngIf="censoredText">
+    <mat-card-title class="text-center">Censored Text</mat-card-title>
+    <mat-card-content>
       <mat-card>
-        <div>c: {{ result.c }}</div>
-        <div>h: {{ result.h }}</div>
-        <div>l: {{ result.l }}</div>
-        <div>n: {{ result.n }}</div>
-        <div>o: {{ result.o }}</div>
-        <div>t: {{ result.t }}</div>
-        <div>v: {{ result.v }}</div>
-        <div>vw: {{ result.vw }}</div>
+        <div>{{ censoredText }}</div>
       </mat-card>
     </mat-card-content>
-  </div>
+  </ng-container>
 </mat-card>
 
 <router-outlet></router-outlet>

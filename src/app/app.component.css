@@ -1,3 +1,11 @@
 .vert-spacer {
   padding-top: 2.5rem;
 }
+
+.full-width {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
